@@ -15,7 +15,7 @@ rm -f "$list.rel"
 total=$(wc -l < "$list")
 cd "$root"
 failed=$(mktemp)
-tree-sitter parse --config-path "$config" --paths "$list" -q 2>&1 | grep -E '\(ERROR|MISSING|error' | sed 's/:.*//; s/\t.*//' | sort -u > "$failed" || true
+tree-sitter parse --config-path "$config" --paths "$list" -q 2>&1 | grep -E '\(ERROR|MISSING' | awk '{print $1}' | sort -u > "$failed" || true
 # a known gap is listed relative to the checkout
 unknown=0
 while IFS= read -r file; do
