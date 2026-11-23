@@ -1,0 +1,27 @@
+# Files that do not parse without ERROR nodes, relative to an ablac checkout. Two kinds:
+# - tests/cases/**/invalid-*.ab, bootstrap/invalid*.ab, text-blocks/invalid-*: syntax errors on purpose;
+# - subparser sites whose raw text is the provider's own syntax (unbalanced quotes or tags that span lines),
+#   and compile-tls/main.ab, a template with @PLACEHOLDERS@.
+tests/cases/bootstrap/invalid.ab
+tests/cases/bootstrap/invalid-parser-diagnostics.ab
+tests/cases/compile-tls/main.ab
+tests/cases/modules/html-attributes.ab
+tests/cases/modules/invalid-cast-type.ab
+tests/cases/modules/invalid-elvis-template.ab
+tests/cases/modules/invalid-escape-short.ab
+tests/cases/modules/invalid-escape-unknown.ab
+tests/cases/modules/invalid-extension-receiver.ab
+tests/cases/modules/invalid-import-alias-invalid.ab
+tests/cases/modules/invalid-loop-label.ab
+tests/cases/modules/invalid-parse-stops-delimiters.ab
+tests/cases/modules/invalid-reserved-generator.ab
+tests/cases/modules/invalid-statement-separator.ab
+tests/cases/modules/nested-deferred-nominal-action.ab
+tests/cases/modules/nested-generated-subparser.ab
+tests/cases/sql/brace.ab
+tests/cases/strict-imports/subparser/bad-view.ab
+tests/cases/strict-imports/subparser/view.ab
+tests/cases/subparser-raw-isolation/preview-local.ab
+tests/cases/subparser-raw-isolation/transitive/main.ab
+tests/cases/text-blocks/invalid-unclosed.ab
+tests/cases/xml-literal/main.ab

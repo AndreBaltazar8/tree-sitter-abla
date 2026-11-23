@@ -1,0 +1,247 @@
+================================================================================
+function with a result and an expression body
+================================================================================
+fun double(n: int): int = n * 2
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    (identifier)
+    (parameters
+      (parameter
+        (identifier)
+        (type_name
+          (identifier))))
+    (type_name
+      (identifier))
+    (binary_expression
+      (identifier)
+      (integer_literal))))
+
+================================================================================
+class, interface and extension function
+================================================================================
+interface Shape {
+    fun area(): int
+}
+
+class Square(val side: int): Shape {
+    fun area(): int = side * side
+}
+
+fun string.shout(): string = this + "!"
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (interface_declaration
+    (identifier)
+    (class_body
+      (function_declaration
+        (identifier)
+        (parameters)
+        (type_name
+          (identifier)))))
+  (class_declaration
+    (identifier)
+    (parameters
+      (parameter
+        (identifier)
+        (type_name
+          (identifier))))
+    (type_name
+      (identifier))
+    (class_body
+      (function_declaration
+        (identifier)
+        (parameters)
+        (type_name
+          (identifier))
+        (binary_expression
+          (identifier)
+          (identifier)))))
+  (function_declaration
+    (receiver_type
+      (identifier))
+    (identifier)
+    (parameters)
+    (type_name
+      (identifier))
+    (binary_expression
+      (this_expression)
+      (string_literal
+        (string_content)))))
+
+================================================================================
+newline ends a statement, a leading dot continues it
+================================================================================
+fun main {
+    val a = 1
+    val b = 2 +
+        3
+    val c = "abcdef"
+        .slice(0, 3)
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    (identifier)
+    (block
+      (property_declaration
+        (identifier)
+        (integer_literal))
+      (property_declaration
+        (identifier)
+        (binary_expression
+          (integer_literal)
+          (integer_literal)))
+      (property_declaration
+        (identifier)
+        (call_expression
+          (member_expression
+            (string_literal
+              (string_content))
+            (identifier))
+          (arguments
+            (integer_literal)
+            (integer_literal)))))))
+
+================================================================================
+when, if, loops and labels
+================================================================================
+fun main {
+    when (n) {
+        0 -> "zero"
+        1, 2 -> "small"
+        else -> "other"
+    }
+    outer@ for (i in 0..3) {
+        if (i > 1) break@outer else continue
+    }
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    (identifier)
+    (block
+      (when_expression
+        (when_subject
+          (identifier))
+        (when_arm
+          (integer_literal)
+          (string_literal
+            (string_content)))
+        (when_arm
+          (integer_literal)
+          (integer_literal)
+          (string_literal
+            (string_content)))
+        (when_arm
+          (else_pattern)
+          (string_literal
+            (string_content))))
+      (labeled_loop
+        (identifier)
+        (for_statement
+          (identifier)
+          (range_expression
+            (integer_literal)
+            (integer_literal))
+          (block
+            (if_expression
+              (binary_expression
+                (identifier)
+                (integer_literal))
+              (break_expression
+                (identifier))
+              (continue_expression))))))))
+
+================================================================================
+strings, interpolation and a compile-time subparser
+================================================================================
+val greeting = "hello $name and ${count + 1} é"
+val raw = """a "quote" $HOME"""
+val document = $json {"key": [1, 2]}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (property_declaration
+    (identifier)
+    (string_literal
+      (string_content)
+      (interpolation
+        (interpolated_identifier))
+      (string_content)
+      (interpolation
+        (binary_expression
+          (identifier)
+          (integer_literal)))
+      (string_content)))
+  (property_declaration
+    (identifier)
+    (raw_string_literal))
+  (property_declaration
+    (identifier)
+    (subparser_expression
+      (identifier)
+      (subparser_raw))))
+
+================================================================================
+lambdas, trailing lambdas and generics
+================================================================================
+fun main {
+    val add = { a: int, b: int -> a + b }
+    items.each { item -> use(item) }
+    val xs = array<int>()
+    val big = x < y
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    (identifier)
+    (block
+      (property_declaration
+        (identifier)
+        (lambda
+          (lambda_parameters
+            (identifier)
+            (type_name
+              (identifier))
+            (identifier)
+            (type_name
+              (identifier)))
+          (binary_expression
+            (identifier)
+            (identifier))))
+      (postfix_lambda_call
+        (member_expression
+          (identifier)
+          (identifier))
+        (lambda
+          (lambda_parameters
+            (identifier))
+          (call_expression
+            (identifier)
+            (arguments
+              (identifier)))))
+      (property_declaration
+        (identifier)
+        (generic_call
+          (identifier)
+          (type_arguments
+            (type_name
+              (identifier)))
+          (arguments)))
+      (property_declaration
+        (identifier)
+        (binary_expression
+          (identifier)
+          (identifier))))))

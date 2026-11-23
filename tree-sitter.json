@@ -1,0 +1,19 @@
+{
+  "grammars": [
+    {
+      "name": "abla",
+      "camelcase": "Abla",
+      "scope": "source.abla",
+      "path": ".",
+      "file-types": ["ab"],
+      "highlights": "queries/highlights.scm",
+      "injection-regex": "^abla$"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Tree-sitter grammar for the Abla programming language",
+    "authors": [{ "name": "Andre Baltazar" }]
+  }
+}
