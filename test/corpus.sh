@@ -8,7 +8,10 @@ ablac=${1:?usage: corpus.sh /path/to/ablac}
 list=$(mktemp)
 config=$(mktemp)
 trap 'rm -f "$list" "$config"' EXIT
-printf '{ "parser-directories": ["%s"] }\n' "$(dirname "$root")" > "$config"
+parsers=$(mktemp -d)
+trap 'rm -rf "$parsers"; rm -f "$list" "$config"' EXIT
+ln -s "$root" "$parsers/tree-sitter-abla"
+printf '{ "parser-directories": ["%s"] }\n' "$parsers" > "$config"
 (cd "$ablac" && find stdlib src tests/cases -name '*.ab' | sort) > "$list.rel"
 sed "s|^|$ablac/|" "$list.rel" > "$list"
 rm -f "$list.rel"
