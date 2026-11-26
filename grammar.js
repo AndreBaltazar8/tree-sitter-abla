@@ -385,7 +385,7 @@ module.exports = grammar({
     assignment_expression: ($) =>
       prec.right(
         PREC.assign,
-        seq($._expression, choice("=", "+=", "-=", "*=", "/=", "%=", "&=", "|=", "^=", "<<=", ">>="), $._expression),
+        seq($._expression, choice("=", "+=", "-=", "*=", "/=", "%=", "&&=", "||=", "&=", "|=", "^=", "<<=", ">>="), $._expression),
       ),
 
     unary_expression: ($) =>

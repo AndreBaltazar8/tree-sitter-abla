@@ -1,0 +1,24 @@
+==================
+Boolean compound assignments
+==================
+
+fun update(var flag: bool): bool {
+    flag &&= true
+    flag ||= false
+    flag
+}
+
+---
+
+(source_file
+  (function_declaration
+    (identifier)
+    (parameters
+      (parameter
+        (identifier)
+        (type_name (identifier))))
+    (type_name (identifier))
+    (block
+      (assignment_expression (identifier) (boolean_literal))
+      (assignment_expression (identifier) (boolean_literal))
+      (identifier))))
